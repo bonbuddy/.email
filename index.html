@@ -1,41 +1,146 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>jonas.email – Bald verfügbar</title>
-  <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;600&display=swap" rel="stylesheet">
+  <title>hagemann.email – Bald verfügbar</title>
+  <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;600&display=swap" rel="stylesheet" />
   <style>
-    body {
+    html, body {
       margin: 0;
       padding: 0;
-      height: 100vh;
       font-family: 'Jost', sans-serif;
-      background-color: #ffffff;
-      color: #ffffff;
+      background: #ffffff;
+      min-height: 300vh;
+      overflow-x: hidden;
+    }
+
+    /* 💻 Laptop */
+    #laptop {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(1);
+      width: 500px;
+      opacity: 1;
+      z-index: 0;
+      pointer-events: none;
+      transition: transform 0.1s ease-out;
+    }
+
+    /* 💬 Content */
+    .content {
+      position: relative;
+      z-index: 1;
       display: flex;
       flex-direction: column;
-      justify-content: center;
       align-items: center;
+      padding-top: 20vh;
       text-align: center;
     }
+
     h1 {
       font-size: 3rem;
       font-weight: 600;
-      margin-bottom: 0.5rem;
+      margin-bottom: 1rem;
     }
+
+    /* 🌈 Permanenter animierter Verlauf */
+    .gradient-title {
+      font-size: 3rem;
+      font-weight: 600;
+      background: linear-gradient(270deg, #425961, #28a3b6, #326273, #425961);
+      background-size: 800% 800%;
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: gradientShift 8s ease infinite;
+    }
+
+    /* 🔁 Farbverlauf-Animation */
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
     p {
       font-size: 1.2rem;
-      color: #aaaaaa;
+      max-width: 600px;
+      color: #2a2a2a;
     }
-    .highlight {
-      color: #425961;
+
+    .cta-box {
+  position: fixed;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(to bottom, #ffffff, #f9f9f9);
+  box-shadow: 0 8px 24px rgba(66, 89, 97, 0.5);
+  border-radius: 20px;
+  padding: 1.5rem 2rem;
+  max-width: 90%;
+  width: 500px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  z-index: 1000;
+  backdrop-filter: blur(10px);
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+    .cta-text {
+      font-size: 1.5rem;
       font-weight: 600;
+      color: #2a2a2a;
+    }
+
+    .cta-button {
+      background-color: #326273;
+      color: #ffffff;
+      text-decoration: none;
+      padding: 0.8rem 1.6rem;
+      border-radius: 999px;
+      font-weight: 600;
+      font-size: 1rem;
+      box-shadow: 0 4px 14px rgba(66, 89, 97, 0.4);
+      transition: background 0.3s ease, transform 0.2s ease;
+    }
+
+    .cta-button:hover {
+      background-color: #447a8f;
+      transform: scale(1.05);
     }
   </style>
 </head>
 <body>
-  <h1><span class="highlight">jonas.email</span></h1>
-  <p>Hier entsteht etwas Neues. <br> Schau bald wieder vorbei!</p>
+
+  <!-- 💻 Laptop-Hintergrund -->
+  <img src="laptop.png" id="laptop" alt="Laptop" />
+
+  <!-- ✨ Inhalt -->
+  <div class="content">
+    <h1 class="gradient-title">hagemann.email</h1>
+    <p></p>
+  </div>
+
+  <!-- 📦 CTA Box -->
+  <div class="cta-box">
+    <div class="cta-text">Hier wird's interessant!</div>
+    <a href="https://partner.bonbuddy.de/platzhalter" class="cta-button">Klick!</a>
+  </div>
+
+  <!-- 🚀 JS: Zoom-Effekt -->
+  <script>
+    const laptop = document.getElementById('laptop');
+    window.addEventListener('scroll', () => {
+      const scrollY = window.scrollY;
+      const scale = 1 + scrollY / 1500;
+      laptop.style.transform = `translate(-50%, -50%) scale(${scale})`;
+    });
+  </script>
+
 </body>
 </html>
